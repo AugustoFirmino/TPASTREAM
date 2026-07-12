@@ -425,7 +425,7 @@ transition
 
 >
 
-Fale Connosco
+Conheça a RCTV Stream
 
 <FaArrowRight/>
 
