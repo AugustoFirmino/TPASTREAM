@@ -233,9 +233,18 @@ mt-3
 
 {desenvolvedor.instituicao}
 
-{desenvolvedor.universidade}
+
 </p>
 
+<p className="
+text-gray-600
+mt-3
+">
+
+{desenvolvedor.universidade}
+
+
+</p>
 
 
 <p className="
