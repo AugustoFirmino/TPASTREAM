@@ -12,7 +12,13 @@ import {
 } from "react-icons/fa";
 
 
+import   Hero from "../components/Hero";
+import Estatistica from "../components/Estatisticas";
+import Footer from "../components/footer";
+
+
 export default function Criador() {
+
 
 
 const projetos = [
@@ -52,6 +58,7 @@ tecnologia:
 
 return (
 
+
 <div
 
 className="
@@ -62,6 +69,10 @@ px-5
 "
 
 >
+<Hero/>
+
+<Estatistica/>
+  
 
 
 <div
@@ -712,6 +723,7 @@ text-gray-600
 
 
 
+<Footer/>
 </div>
 
 );
