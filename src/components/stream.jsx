@@ -5,160 +5,166 @@ import socket from "./socket";
 export default function Stream() {
 
 
-  const canais = [
-    {
-      nome: "TPA 1",
-      url: "https://til-waiver-proudly-brave.trycloudflare.com/embed/1"
-    },
-    {
-      nome: "TPA 2",
-      url: "https://til-waiver-proudly-brave.trycloudflare.com/embed/2"
-    },
-    {
-      nome: "TPA Notícias",
-      url: "https://til-waiver-proudly-brave.trycloudflare.com/embed/3"
-    },
-    {
-      nome: "TV Zimbo",
-      url: "https://til-waiver-proudly-brave.trycloudflare.com/embed/4"
-    },
-    {
-      nome: "TV Girasol",
-      url: "https://til-waiver-proudly-brave.trycloudflare.com/embed/5"
-    },
-    {
-      nome: "TV Parlamento",
-      url: "https://www.youtube.com/embed/CIpNJ-bMGsI"
-    }
-  ];
+const canais = [
+{
+nome:"TPA 1",
+url:"https://til-waiver-proudly-brave.trycloudflare.com/embed/1"
+},
+{
+nome:"TPA 2",
+url:"https://til-waiver-proudly-brave.trycloudflare.com/embed/2"
+},
+{
+nome:"TPA Notícias",
+url:"https://til-waiver-proudly-brave.trycloudflare.com/embed/3"
+},
+{
+nome:"TV Zimbo",
+url:"https://til-waiver-proudly-brave.trycloudflare.com/embed/4"
+},
+{
+nome:"TV Girasol",
+url:"https://til-waiver-proudly-brave.trycloudflare.com/embed/5"
+},
+{
+nome:"TV Parlamento",
+url:"https://www.youtube.com/embed/CIpNJ-bMGsI"
+}
+];
 
 
 
-  const [canalAtual,setCanalAtual] = useState(canais[0]);
+const [canalAtual,setCanalAtual]=useState(canais[0]);
+const [loading,setLoading]=useState(true);
+const [online,setOnline]=useState(navigator.onLine);
+const [espectadores,setEspectadores]=useState({});
 
-  const [loading,setLoading] = useState(true);
 
-  const [online,setOnline] = useState(navigator.onLine);
 
-  const [espectadores,setEspectadores] = useState({});
 
 
+useEffect(()=>{
 
 
+const onlineHandler=()=>{
 
+setOnline(true);
+setLoading(true);
 
+};
 
-  // INTERNET
 
-  useEffect(()=>{
+const offlineHandler=()=>{
 
+setOnline(false);
 
-    const onlineHandler=()=>{
+};
 
-      setOnline(true);
-      setLoading(true);
 
-    };
+window.addEventListener("online",onlineHandler);
+window.addEventListener("offline",offlineHandler);
 
 
-    const offlineHandler=()=>{
+return()=>{
 
-      setOnline(false);
+window.removeEventListener("online",onlineHandler);
+window.removeEventListener("offline",offlineHandler);
 
-    };
+};
 
 
-    window.addEventListener("online",onlineHandler);
+},[]);
 
-    window.addEventListener("offline",offlineHandler);
 
 
 
-    return()=>{
 
-      window.removeEventListener("online",onlineHandler);
 
-      window.removeEventListener("offline",offlineHandler);
 
-    };
+useEffect(()=>{
 
 
-  },[]);
+const receberEspectadores=(dados)=>{
 
+setEspectadores(dados);
 
+};
 
 
+socket.on(
+"espectadores",
+receberEspectadores
+);
 
 
 
+const entrar=()=>{
 
-  // SOCKET
 
-  useEffect(()=>{
+socket.emit(
+"entrarCanal",
+canais[0].nome
+);
 
 
-    const receberEspectadores=(dados)=>{
+};
 
-      setEspectadores(dados);
 
-    };
 
+if(socket.connected){
 
-    socket.on(
-      "espectadores",
-      receberEspectadores
-    );
+entrar();
 
+}else{
 
+socket.on(
+"connect",
+entrar
+);
 
-    const entrar=()=>{
+}
 
 
-      socket.emit(
-        "entrarCanal",
-        canais[0].nome
-      );
 
+return()=>{
 
-    };
+socket.off(
+"espectadores",
+receberEspectadores
+);
 
 
+socket.off(
+"connect",
+entrar
+);
 
-    if(socket.connected){
+};
 
-      entrar();
 
-    }else{
+},[]);
 
-      socket.on(
-        "connect",
-        entrar
-      );
 
-    }
 
 
 
-    return()=>{
 
 
-      socket.off(
-        "espectadores",
-        receberEspectadores
-      );
+const trocarCanal=(canal)=>{
 
 
-      socket.off(
-        "connect",
-        entrar
-      );
+setLoading(true);
 
+setCanalAtual(canal);
 
-    };
 
+socket.emit(
+"entrarCanal",
+canal.nome
+);
 
-  },[]);
 
+};
 
 
 
@@ -166,137 +172,151 @@ export default function Stream() {
 
 
 
-  const trocarCanal=(canal)=>{
 
+return (
 
-    setLoading(true);
+<div
+className="
+w-full
+max-w-6xl
+mx-auto
+px-2
+sm:px-5
+flex
+flex-col
+items-center
+"
+>
 
-    setCanalAtual(canal);
 
 
-    socket.emit(
-      "entrarCanal",
-      canal.nome
-    );
 
 
-  };
+{/* CANAIS */}
 
+<div
+className="
+w-full
+flex
+flex-wrap
+justify-center
+gap-2
+mb-5
+"
+>
 
 
+{
+canais.map((canal,index)=>(
 
 
+<button
 
+key={index}
 
+onClick={()=>trocarCanal(canal)}
 
+className={`
+px-4
+py-2
+rounded-lg
+font-semibold
+text-sm
+transition
 
-  return (
+${
 
+canalAtual.nome===canal.nome
 
-    <div
-    className="
-    w-full
-    max-w-7xl
-    mx-auto
-    px-3
-    sm:px-5
-    flex
-    flex-col
-    items-center
-    overflow-hidden
-    "
-    >
+?
 
+"bg-red-700 text-white"
 
+:
 
+"bg-gray-200 text-gray-800"
 
+}
 
+`}
 
+>
 
-      {/* MENU */}
 
-      <div
-      className="
-      w-full
-      flex
-      flex-wrap
-      justify-center
-      gap-2
-      mb-5
-      "
-      >
+{canal.nome}
 
+<br/>
 
-      {
-        canais.map((canal,index)=>(
+<span className="text-xs">
 
+👁 {espectadores[canal.nome] || 0}
 
-          <button
+</span>
 
-          key={index}
 
-          onClick={()=>trocarCanal(canal)}
+</button>
 
-          className={`
 
-          flex-1
-          min-w-[140px]
-          sm:flex-none
+))
+}
 
-          px-4
-          py-3
 
-          rounded-xl
+</div>
 
-          font-semibold
 
-          text-sm
-          sm:text-base
 
-          transition
 
-          ${
-            canalAtual.nome===canal.nome
 
-            ?
 
-            "bg-red-700 text-white shadow-lg"
 
-            :
 
-            "bg-gray-200 text-gray-800 hover:bg-red-100"
+{/* TITULO */}
 
-          }
+<div
+className="
+w-full
+flex
+justify-between
+items-center
+mb-3
+"
+>
 
-          `}
 
-          >
+<h2
+className="
+text-xl
+sm:text-2xl
+font-bold
+"
+>
 
+{canalAtual.nome}
 
-          <p>
-          {canal.nome}
-          </p>
+</h2>
 
 
-          <span
-          className="
-          text-xs
-          "
-          >
 
-          👁 {espectadores[canal.nome] || 0}
+<div
+className="
+bg-red-700
+text-white
+px-4
+py-2
+rounded-full
+text-sm
+"
+>
 
-          </span>
+🔴 AO VIVO
 
+</div>
 
-          </button>
 
 
-        ))
-      }
+</div>
 
 
-      </div>
 
 
 
@@ -304,63 +324,43 @@ export default function Stream() {
 
 
 
+{/* PLAYER AJUSTADO PARA MOBILE */}
 
 
-      {/* CABEÇALHO */}
+<div
 
+className="
 
-      <div
-      className="
-      w-full
-      flex
-      flex-col
-      sm:flex-row
-      justify-between
-      items-center
-      gap-3
-      mb-3
-      "
-      >
+relative
 
+w-full
 
-      <h2
-      className="
-      text-xl
-      sm:text-2xl
-      font-bold
-      "
-      >
+bg-black
 
-      {canalAtual.nome}
+rounded-xl
 
-      </h2>
+overflow-hidden
 
+shadow-xl
 
 
+/* MOBILE */
 
+h-[210px]
 
-      <div
-      className="
-      bg-red-700
-      text-white
-      px-5
-      py-2
-      rounded-full
-      text-sm
-      sm:text-base
-      "
-      >
 
-      🔴 AO VIVO
+/* TABLET */
 
-      👁 {espectadores[canalAtual.nome] || 0}
+sm:h-[400px]
 
 
-      </div>
+/* PC */
 
+lg:h-[610px]
 
+"
 
-      </div>
+>
 
 
 
@@ -368,198 +368,162 @@ export default function Stream() {
 
 
 
+{
+!online &&
 
+<div
+className="
+absolute
+inset-0
+z-20
+bg-black
+text-white
+flex
+flex-col
+justify-center
+items-center
+text-center
+"
+>
 
-      {/* PLAYER RESPONSIVO */}
+<div className="text-5xl">
+📡
+</div>
 
+<h2 className="text-xl font-bold mt-4">
 
-      <div
+Sem conexão
 
-      className="
-      relative
-      w-full
-      aspect-video
-      bg-black
-      rounded-xl
-      overflow-hidden
-      shadow-xl
-      "
+</h2>
 
-      >
+</div>
 
+}
 
 
 
 
 
 
-      {!online && (
 
 
-        <div
-        className="
-        absolute
-        inset-0
-        flex
-        flex-col
-        justify-center
-        items-center
-        bg-black
-        text-white
-        z-20
-        text-center
-        px-5
-        "
-        >
+{
+online && loading &&
 
 
-        <div className="text-6xl">
-        📡
-        </div>
+<div
 
+className="
+absolute
+inset-0
+z-10
+bg-black
+text-white
+flex
+flex-col
+justify-center
+items-center
+"
 
-        <h2
-        className="
-        text-xl
-        sm:text-3xl
-        font-bold
-        mt-5
-        "
-        >
+>
 
-        Sem conexão com a Internet
 
-        </h2>
+<div
+className="
+w-12
+h-12
+border-4
+border-red-600
+border-t-transparent
+rounded-full
+animate-spin
+"
+/>
 
 
-        </div>
+<p
+className="
+mt-5
+font-bold
+"
+>
 
+Aguardando conexão...
 
-      )}
+</p>
 
 
+</div>
 
 
+}
 
 
 
 
 
-      {
-      online && loading && (
 
 
-        <div
 
-        className="
-        absolute
-        inset-0
-        flex
-        flex-col
-        justify-center
-        items-center
-        bg-black
-        text-white
-        z-10
-        "
 
-        >
+<iframe
 
+id="transmissao"
 
-        <div
-        className="
-        w-14
-        h-14
-        border-4
-        border-red-600
-        border-t-transparent
-        rounded-full
-        animate-spin
-        "
-        />
+key={canalAtual.url}
 
+src={canalAtual.url}
 
+title={canalAtual.nome}
 
-        <h2
-        className="
-        text-xl
-        sm:text-3xl
-        font-bold
-        mt-6
-        "
-        >
 
-        Aguardando conexão...
+className="
 
-        </h2>
+w-full
 
+h-full
 
-        </div>
+block
 
+"
 
-      )
-      }
+scrolling="no"
 
 
+allow="
+autoplay;
+fullscreen;
+encrypted-media;
+picture-in-picture
+"
 
 
+allowFullScreen
 
 
+onLoad={()=>setLoading(false)}
 
 
-      <iframe
+style={{
 
-      id="transmissao"
+border:"none",
 
-      key={canalAtual.url}
+objectFit:"contain"
 
-      src={canalAtual.url}
+}}
 
-      title={canalAtual.nome}
 
+/>
 
-      className="
-      w-full
-      h-full
-      "
 
-      scrolling="no"
 
+</div>
 
-      allow="
-      autoplay;
-      fullscreen;
-      encrypted-media;
-      picture-in-picture
-      "
 
 
-      allowFullScreen
+</div>
 
-
-      onLoad={()=>setLoading(false)}
-
-
-      style={{
-        border:"none"
-      }}
-
-
-      />
-
-
-
-
-
-      </div>
-
-
-
-
-    </div>
-
-
-  );
+);
 
 
 }
