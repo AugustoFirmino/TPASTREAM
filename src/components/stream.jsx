@@ -53,6 +53,8 @@ const [espectadores,setEspectadores] = useState({});
 
 
 
+
+
 // INTERNET
 
 useEffect(()=>{
@@ -111,14 +113,29 @@ offlineHandler
 
 
 
+
+
 // SOCKET.IO RENDER
 
 useEffect(()=>{
 
 
-const receberEspectadores = (dados)=>{
+// garantir conexão
+if(!socket.connected){
+
+socket.connect();
+
+}
+
+
+
+
+// receber espectadores
+const atualizarEspectadores = (dados)=>{
+
 
 setEspectadores(dados);
+
 
 };
 
@@ -126,12 +143,15 @@ setEspectadores(dados);
 
 socket.on(
 "espectadores",
-receberEspectadores
+atualizarEspectadores
 );
 
 
 
 
+
+
+// entrar no canal atual
 
 const entrarCanal = ()=>{
 
@@ -171,7 +191,7 @@ return()=>{
 
 socket.off(
 "espectadores",
-receberEspectadores
+atualizarEspectadores
 );
 
 
@@ -185,6 +205,7 @@ entrarCanal
 
 
 },[]);
+
 
 
 
@@ -220,6 +241,8 @@ canal.nome
 
 
 
+
+
 return (
 
 <div
@@ -236,6 +259,7 @@ items-center
 "
 
 >
+
 
 
 
@@ -268,6 +292,7 @@ key={index}
 onClick={()=>trocarCanal(canal)}
 
 className={`
+
 px-4
 py-2
 rounded-lg
@@ -368,6 +393,7 @@ font-bold
 {canalAtual.nome}
 
 </h2>
+
 
 
 
@@ -525,13 +551,7 @@ items-center
 >
 
 
-<p
-
-className="
-font-bold
-"
-
->
+<p className="font-bold">
 
 Aguardando conexão...
 
@@ -542,6 +562,7 @@ Aguardando conexão...
 
 
 }
+
 
 
 
