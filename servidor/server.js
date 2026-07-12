@@ -13,14 +13,15 @@ const server = http.createServer(app);
 
 
 const io = new Server(server, {
-
     cors: {
-        origin: "http://localhost:5173",
-        methods: ["GET", "POST"]
+        origin: [
+            "http://localhost:5173",
+            "https://rctvstream.vercel.app"
+        ],
+        methods: ["GET", "POST"],
+        credentials: true
     }
-
 });
-
 
 
 // Contadores
@@ -167,7 +168,7 @@ const PORT = 3001;
 server.listen(PORT, "0.0.0.0", () => {
 
     console.log(
-        ` Servidor rodando na porta ${PORT}`
+        `🚀 Servidor rodando na porta ${PORT}`
     );
 
 });
