@@ -59,29 +59,36 @@ Possui experiência em React.js, Node.js, APIs, MySQL, Tailwind CSS, Inteligênc
 
 
 
-
 projetos:[
 
-
 {
-
-nome:"RCTV Stream - Plataforma de transmissão online",
+nome:"RCTV Stream - Plataforma de Transmissão Online",
 
 descricao:`
+Plataforma digital de transmissão de conteúdos em directo,
+desenvolvida para disponibilizar canais online através da internet.
 
-Plataforma de transmissão de conteúdos em directo desenvolvida para permitir
-a distribuição de canais online.
-
-O sistema possui integração com streaming, reprodução de vídeo, gestão de canais,
-interface responsiva e experiência semelhante às plataformas profissionais de TV online.
-
+O sistema permite reprodução de vídeo, gestão de canais,
+transmissão em tempo real e uma experiência semelhante
+a uma televisão digital profissional.
 `,
+
+objetivo:`
+Criar uma solução própria de streaming capaz de transmitir
+conteúdos online de forma simples, rápida e acessível.
+`,
+
+link:"https://rctvstream.vercel.app",
+
+estado:"Online",
 
 tecnologias:[
 "React.js",
 "Node.js",
 "Socket.io",
-"Tailwind CSS"
+"Tailwind CSS",
+"Cloudflare",
+"Streaming"
 ]
 
 },
@@ -93,20 +100,27 @@ tecnologias:[
 nome:"Sistema de Gestão de Directores",
 
 descricao:`
+Sistema web desenvolvido para cadastro e administração
+completa de informações de directores.
 
-Sistema desenvolvido para cadastro e gestão completa de directores.
-
-Permite armazenar informações pessoais, biografias, experiências profissionais,
-qualificações, imagens e depoimentos.
-
-Possui integração entre frontend React e backend Node.js com base de dados MySQL.
-
+Permite gerir dados pessoais, biografias, experiências,
+qualificações, imagens, depoimentos e informações profissionais.
 `,
+
+objetivo:`
+Facilitar a organização e gestão de informações institucionais
+através de uma plataforma digital moderna.
+`,
+
+link:"#",
+
+estado:"Em desenvolvimento",
 
 tecnologias:[
 "React.js",
 "Node.js",
 "MySQL",
+"Express",
 "Cloudinary"
 ]
 
@@ -117,22 +131,32 @@ tecnologias:[
 
 {
 
-nome:"Tradutor Português - Kimbundu",
+nome:"Tradutor Português - Kimbundu com Inteligência Artificial",
 
 descricao:`
+Projeto de tradução linguística criado para aproximar
+a língua portuguesa e o Kimbundu através da tecnologia.
 
-Projeto de inteligência linguística criado para tradução entre português e kimbundu.
-
-O sistema trabalha com dicionário personalizado, regras gramaticais,
-processamento de frases e possibilidade de integração com reconhecimento de voz.
-
+O sistema utiliza dicionário personalizado, regras gramaticais,
+processamento de frases e possibilidade de integração
+com reconhecimento de voz.
 `,
 
+objetivo:`
+Preservar e valorizar a língua Kimbundu através de uma
+ferramenta tecnológica de tradução.
+`,
+
+link:"#",
+
+estado:"Em desenvolvimento",
+
 tecnologias:[
-"React",
+"React.js",
 "Node.js",
 "MySQL",
-"IA"
+"IA",
+"Processamento de Linguagem Natural"
 ]
 
 },
@@ -145,17 +169,29 @@ tecnologias:[
 nome:"Sistemas Web Empresariais",
 
 descricao:`
-
 Desenvolvimento de sistemas personalizados para empresas,
-incluindo dashboards administrativos, gestão de dados,
-autenticação de utilizadores e APIs.
+incluindo plataformas administrativas, dashboards,
+gestão de utilizadores e APIs.
 
+As soluções são adaptadas às necessidades específicas
+de cada organização.
 `,
 
+objetivo:`
+Digitalizar processos empresariais e melhorar a produtividade
+através de sistemas inteligentes.
+`,
+
+link:"#",
+
+estado:"Projetos personalizados",
+
 tecnologias:[
-"React",
+"React.js",
+"Node.js",
 "Express",
-"MySQL"
+"MySQL",
+"API REST"
 ]
 
 },
@@ -168,15 +204,27 @@ tecnologias:[
 nome:"Aplicações Digitais Personalizadas",
 
 descricao:`
+Criação de aplicações web personalizadas para diferentes
+necessidades, desde websites institucionais até plataformas
+digitais completas.
 
-Criação de soluções digitais adaptadas às necessidades dos clientes,
-desde websites institucionais até plataformas completas.
-
+O foco é desenvolver experiências modernas, rápidas
+e responsivas.
 `,
+
+objetivo:`
+Transformar ideias em produtos digitais funcionais
+e preparados para o mercado.
+`,
+
+link:"#",
+
+estado:"Disponível para projetos",
 
 tecnologias:[
 "JavaScript",
-"React",
+"React.js",
+"Tailwind CSS",
 "Node.js"
 ]
 
@@ -185,7 +233,6 @@ tecnologias:[
 
 
 ],
-
 
 
 
@@ -602,11 +649,9 @@ mt-6
 
 {/* MODAL DOS PROJETOS */}
 
-
 {
 
 projetoSelecionado && (
-
 
 <div className="
 fixed
@@ -627,7 +672,11 @@ w-full
 rounded-2xl
 p-8
 relative
+shadow-2xl
+overflow-y-auto
+max-h-[90vh]
 ">
+
 
 
 <button
@@ -640,6 +689,8 @@ right-5
 top-5
 text-red-600
 text-xl
+hover:scale-110
+transition
 "
 
 >
@@ -651,16 +702,34 @@ text-xl
 
 
 
+
 <h2 className="
 text-2xl
 font-bold
-mb-4
+mb-5
+text-gray-900
 ">
 
 {projetoSelecionado.nome}
 
 </h2>
 
+
+
+
+
+{/* DESCRIÇÃO */}
+
+<h3 className="
+font-bold
+text-lg
+mb-2
+text-red-600
+">
+
+Descrição do Projeto
+
+</h3>
 
 
 <p className="
@@ -675,27 +744,107 @@ leading-relaxed
 
 
 
+
+
+
+
+{/* OBJECTIVO */}
+
 <h3 className="
 font-bold
-mt-5
+text-lg
+mt-6
+mb-2
+text-red-600
 ">
 
-Tecnologias usadas:
+Objetivo do Projeto
 
 </h3>
+
+
+<p className="
+text-gray-700
+whitespace-pre-line
+leading-relaxed
+bg-gray-100
+p-4
+rounded-xl
+">
+
+{projetoSelecionado.objetivo}
+
+</p>
+
+
+
+
+
+
+
+{/* ESTADO */}
+
+<h3 className="
+font-bold
+text-lg
+mt-6
+mb-2
+text-red-600
+">
+
+Estado
+
+</h3>
+
+
+<span className="
+inline-block
+bg-green-100
+text-green-700
+px-4
+py-2
+rounded-full
+font-semibold
+">
+
+{projetoSelecionado.estado}
+
+</span>
+
+
+
+
+
+
+
+
+{/* TECNOLOGIAS */}
+
+<h3 className="
+font-bold
+text-lg
+mt-6
+mb-3
+text-red-600
+">
+
+Tecnologias usadas
+
+</h3>
+
 
 
 <div className="
 flex
 flex-wrap
 gap-2
-mt-3
 ">
 
 
 {
 
 projetoSelecionado.tecnologias.map((tec,index)=>(
+
 
 <span
 
@@ -707,6 +856,7 @@ text-red-700
 px-3
 py-1
 rounded-full
+text-sm
 "
 
 >
@@ -718,10 +868,55 @@ rounded-full
 
 ))
 
+
 }
 
 
 </div>
+
+
+
+
+
+
+
+{/* LINK DO PROJECTO */}
+
+{
+
+projetoSelecionado.link !== "#" && (
+
+<a
+
+href={projetoSelecionado.link}
+
+target="_blank"
+
+rel="noopener noreferrer"
+
+className="
+block
+mt-8
+text-center
+bg-red-600
+text-white
+py-3
+rounded-xl
+font-bold
+hover:bg-red-700
+transition
+"
+
+>
+
+Acessar Projeto
+
+</a>
+
+
+)
+
+}
 
 
 
@@ -733,9 +928,7 @@ rounded-full
 
 )
 
-
 }
-
 
 
 
