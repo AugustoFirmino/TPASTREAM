@@ -517,7 +517,7 @@ w-full
 
 bg-black
 
-rounded-xl
+
 
 overflow-hidden
 
