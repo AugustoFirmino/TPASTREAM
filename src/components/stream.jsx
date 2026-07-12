@@ -8,6 +8,7 @@ import {
 } from "react-icons/fa";
 
 
+
 export default function Stream() {
 
 
@@ -40,24 +41,24 @@ url:"https://www.youtube.com/embed/CIpNJ-bMGsI"
 
 
 
-const [canalAtual,setCanalAtual] = useState(canais[0]);
+const [canalAtual,setCanalAtual]=useState(canais[0]);
 
-const [loading,setLoading] = useState(true);
+const [loading,setLoading]=useState(true);
 
-const [online,setOnline] = useState(navigator.onLine);
+const [online,setOnline]=useState(navigator.onLine);
 
-const [espectadores,setEspectadores] = useState({});
-
-
+const [espectadores,setEspectadores]=useState({});
 
 
 
-// INTERNET
+
+
+
 
 useEffect(()=>{
 
 
-const onlineHandler = ()=>{
+const onlineHandler=()=>{
 
 setOnline(true);
 setLoading(true);
@@ -65,7 +66,7 @@ setLoading(true);
 };
 
 
-const offlineHandler = ()=>{
+const offlineHandler=()=>{
 
 setOnline(false);
 
@@ -73,33 +74,17 @@ setOnline(false);
 
 
 
-window.addEventListener(
-"online",
-onlineHandler
-);
+window.addEventListener("online",onlineHandler);
 
-
-window.addEventListener(
-"offline",
-offlineHandler
-);
+window.addEventListener("offline",offlineHandler);
 
 
 
 return()=>{
 
+window.removeEventListener("online",onlineHandler);
 
-window.removeEventListener(
-"online",
-onlineHandler
-);
-
-
-window.removeEventListener(
-"offline",
-offlineHandler
-);
-
+window.removeEventListener("offline",offlineHandler);
 
 };
 
@@ -112,12 +97,12 @@ offlineHandler
 
 
 
-// SOCKET ESPECTADORES
+
 
 useEffect(()=>{
 
 
-const receberEspectadores = (dados)=>{
+const receberEspectadores=(dados)=>{
 
 setEspectadores(dados);
 
@@ -133,9 +118,7 @@ receberEspectadores
 
 
 
-// entrar no canal inicial
-
-const entrarInicial = ()=>{
+const entrar=()=>{
 
 
 socket.emit(
@@ -150,16 +133,14 @@ canais[0].nome
 
 if(socket.connected){
 
-entrarInicial();
+entrar();
 
 }else{
 
-
 socket.on(
 "connect",
-entrarInicial
+entrar
 );
-
 
 }
 
@@ -177,7 +158,7 @@ receberEspectadores
 
 socket.off(
 "connect",
-entrarInicial
+entrar
 );
 
 
@@ -193,13 +174,10 @@ entrarInicial
 
 
 
-// TROCAR CANAL
-
-const trocarCanal = (canal)=>{
+const trocarCanal=(canal)=>{
 
 
 setLoading(true);
-
 
 setCanalAtual(canal);
 
@@ -219,9 +197,12 @@ canal.nome
 
 
 
+
+
 return (
 
 <div
+
 className="
 w-full
 max-w-6xl
@@ -232,14 +213,19 @@ flex
 flex-col
 items-center
 "
+
 >
 
 
 
 
-{/* MENU CANAIS */}
+
+
+
+{/* MENU */}
 
 <div
+
 className="
 w-full
 flex
@@ -248,6 +234,7 @@ justify-center
 gap-2
 mb-5
 "
+
 >
 
 
@@ -263,14 +250,16 @@ key={index}
 onClick={()=>trocarCanal(canal)}
 
 className={`
+
 px-4
 py-2
 rounded-lg
 font-semibold
 text-sm
-transition
+
 
 ${
+
 canalAtual.nome===canal.nome
 
 ?
@@ -283,7 +272,10 @@ canalAtual.nome===canal.nome
 
 }
 
-`}
+`
+
+}
+
 
 >
 
@@ -295,6 +287,7 @@ canalAtual.nome===canal.nome
 
 
 <span
+
 className="
 text-xs
 flex
@@ -302,17 +295,14 @@ justify-center
 items-center
 gap-1
 "
->
 
+>
 
 <FaEye/>
 
-
 {espectadores[canal.nome] || 0}
 
-
 </span>
-
 
 
 </button>
@@ -333,10 +323,12 @@ gap-1
 
 
 
+
 {/* TITULO */}
 
 
 <div
+
 className="
 w-full
 flex
@@ -344,15 +336,18 @@ justify-between
 items-center
 mb-3
 "
+
 >
 
 
 <h2
+
 className="
 text-xl
 sm:text-2xl
 font-bold
 "
+
 >
 
 {canalAtual.nome}
@@ -363,8 +358,8 @@ font-bold
 
 
 
-
 <div
+
 className="
 bg-red-700
 text-white
@@ -376,6 +371,7 @@ items-center
 gap-2
 text-sm
 "
+
 >
 
 
@@ -396,34 +392,48 @@ AO VIVO
 {espectadores[canalAtual.nome] || 0}
 
 
-</div>
-
 
 </div>
 
 
 
+</div>
 
 
 
 
 
 
-{/* PLAYER */}
+
+
+
+{/* PLAYER FULL */}
+
 
 
 <div
 
 className="
+
 relative
+
 w-full
+
 bg-black
+
 rounded-xl
+
 overflow-hidden
+
 shadow-xl
+
+
 h-[220px]
+
 sm:h-[400px]
+
 lg:h-[610px]
+
 "
 
 >
@@ -432,8 +442,12 @@ lg:h-[610px]
 
 
 
+
+
+
 {
 !online &&
+
 
 <div
 
@@ -453,18 +467,22 @@ items-center
 
 
 <FaBroadcastTower
+
 className="
 text-6xl
 mb-5
 "
+
 />
 
 
 <h2
+
 className="
 text-xl
 font-bold
 "
+
 >
 
 Sem conexão
@@ -483,6 +501,8 @@ Sem conexão
 
 
 
+
+
 {
 online && loading &&
 
@@ -490,22 +510,38 @@ online && loading &&
 <div
 
 className="
-absolute
-inset-0
-z-20
+
+relative
+
+w-full
+
 bg-black
-text-white
-flex
-justify-center
-items-center
+
+
+
+overflow-hidden
+
+shadow-xl
+
+
+h-[220px]
+
+sm:h-[400px]
+
+lg:h-[610px]
+
 "
 
 >
 
+
 <p
+
 className="
+mt-5
 font-bold
 "
+
 >
 
 Aguardando conexão...
@@ -524,6 +560,11 @@ Aguardando conexão...
 
 
 
+
+
+{/* VIDEO OCUPA TODA DIV */}
+
+
 <iframe
 
 id="transmissao"
@@ -536,14 +577,26 @@ title={canalAtual.nome}
 
 
 className="
+
 absolute
+
 top-1/2
+
 left-1/2
-w-full
+
+
+w-[100%]
+
 h-[90%]
+
+
 -translate-x-1/2
+
 -translate-y-1/2
+
+
 border-0
+
 "
 
 
@@ -569,7 +622,10 @@ onLoad={()=>setLoading(false)}
 
 
 
+
+
 </div>
+
 
 
 
