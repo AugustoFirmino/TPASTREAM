@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
 import socket from "./socket";
 
+import {
+  FaEye,
+  FaCircle,
+  FaBroadcastTower
+} from "react-icons/fa";
+
+
 
 export default function Stream() {
 
@@ -35,9 +42,14 @@ url:"https://www.youtube.com/embed/CIpNJ-bMGsI"
 
 
 const [canalAtual,setCanalAtual]=useState(canais[0]);
+
 const [loading,setLoading]=useState(true);
+
 const [online,setOnline]=useState(navigator.onLine);
+
 const [espectadores,setEspectadores]=useState({});
+
+
 
 
 
@@ -61,19 +73,40 @@ setOnline(false);
 };
 
 
-window.addEventListener("online",onlineHandler);
-window.addEventListener("offline",offlineHandler);
+
+window.addEventListener(
+"online",
+onlineHandler
+);
+
+
+window.addEventListener(
+"offline",
+offlineHandler
+);
+
 
 
 return()=>{
 
-window.removeEventListener("online",onlineHandler);
-window.removeEventListener("offline",offlineHandler);
+window.removeEventListener(
+"online",
+onlineHandler
+);
+
+
+window.removeEventListener(
+"offline",
+offlineHandler
+);
+
 
 };
 
 
 },[]);
+
+
 
 
 
@@ -91,10 +124,12 @@ setEspectadores(dados);
 };
 
 
+
 socket.on(
 "espectadores",
 receberEspectadores
 );
+
 
 
 
@@ -111,22 +146,27 @@ canais[0].nome
 
 
 
+
 if(socket.connected){
 
 entrar();
 
 }else{
 
+
 socket.on(
 "connect",
 entrar
 );
 
+
 }
 
 
 
+
 return()=>{
+
 
 socket.off(
 "espectadores",
@@ -139,10 +179,12 @@ socket.off(
 entrar
 );
 
+
 };
 
 
 },[]);
+
 
 
 
@@ -156,6 +198,7 @@ const trocarCanal=(canal)=>{
 setLoading(true);
 
 setCanalAtual(canal);
+
 
 
 socket.emit(
@@ -173,7 +216,9 @@ canal.nome
 
 
 
+
 return (
+
 
 <div
 className="
@@ -192,7 +237,9 @@ items-center
 
 
 
+
 {/* CANAIS */}
+
 
 <div
 className="
@@ -207,6 +254,7 @@ mb-5
 
 
 {
+
 canais.map((canal,index)=>(
 
 
@@ -216,7 +264,9 @@ key={index}
 
 onClick={()=>trocarCanal(canal)}
 
+
 className={`
+
 px-4
 py-2
 rounded-lg
@@ -224,44 +274,63 @@ font-semibold
 text-sm
 transition
 
+
 ${
 
 canalAtual.nome===canal.nome
 
 ?
 
-"bg-red-700 text-white"
+"bg-red-700 text-white shadow-lg"
 
 :
 
-"bg-gray-200 text-gray-800"
+"bg-gray-200 text-gray-800 hover:bg-red-100"
 
 }
 
 `}
+
 
 >
 
 
 {canal.nome}
 
+
 <br/>
 
-<span className="text-xs">
 
-👁 {espectadores[canal.nome] || 0}
+<span
+className="
+text-xs
+flex
+justify-center
+items-center
+gap-1
+"
+>
+
+<FaEye/>
+
+{espectadores[canal.nome] || 0}
+
 
 </span>
+
 
 
 </button>
 
 
 ))
+
+
 }
 
 
 </div>
+
 
 
 
@@ -272,7 +341,10 @@ canalAtual.nome===canal.nome
 
 {/* TITULO */}
 
+
+
 <div
+
 className="
 w-full
 flex
@@ -280,7 +352,9 @@ justify-between
 items-center
 mb-3
 "
+
 >
+
 
 
 <h2
@@ -291,13 +365,20 @@ font-bold
 "
 >
 
+
 {canalAtual.nome}
+
 
 </h2>
 
 
 
+
+
+
+
 <div
+
 className="
 bg-red-700
 text-white
@@ -305,15 +386,37 @@ px-4
 py-2
 rounded-full
 text-sm
+flex
+items-center
+gap-2
 "
+
 >
 
-🔴 AO VIVO
+
+<FaCircle
+className="
+text-xs
+animate-pulse
+"
+/>
+
+
+AO VIVO
+
+
+<FaEye/>
+
+
+{espectadores[canalAtual.nome] || 0}
+
+
 
 </div>
 
 
 
+
 </div>
 
 
@@ -324,7 +427,8 @@ text-sm
 
 
 
-{/* PLAYER AJUSTADO PARA MOBILE */}
+{/* PLAYER */}
+
 
 
 <div
@@ -344,17 +448,9 @@ overflow-hidden
 shadow-xl
 
 
-/* MOBILE */
-
 h-[210px]
 
-
-/* TABLET */
-
 sm:h-[400px]
-
-
-/* PC */
 
 lg:h-[610px]
 
@@ -368,10 +464,15 @@ lg:h-[610px]
 
 
 
+
+
+
 {
 !online &&
 
+
 <div
+
 className="
 absolute
 inset-0
@@ -384,19 +485,38 @@ justify-center
 items-center
 text-center
 "
+
 >
 
-<div className="text-5xl">
-📡
-</div>
 
-<h2 className="text-xl font-bold mt-4">
+<FaBroadcastTower
+
+className="
+text-6xl
+mb-5
+"
+
+/>
+
+
+
+<h2
+className="
+text-xl
+font-bold
+"
+>
+
 
 Sem conexão
 
+
 </h2>
 
+
+
 </div>
+
 
 }
 
@@ -407,8 +527,10 @@ Sem conexão
 
 
 
+
 {
 online && loading &&
+
 
 
 <div
@@ -429,6 +551,7 @@ items-center
 
 
 <div
+
 className="
 w-12
 h-12
@@ -438,7 +561,9 @@ border-t-transparent
 rounded-full
 animate-spin
 "
+
 />
+
 
 
 <p
@@ -448,12 +573,15 @@ font-bold
 "
 >
 
+
 Aguardando conexão...
+
 
 </p>
 
 
 </div>
+
 
 
 }
@@ -468,13 +596,18 @@ Aguardando conexão...
 
 <iframe
 
+
 id="transmissao"
+
 
 key={canalAtual.url}
 
+
 src={canalAtual.url}
 
+
 title={canalAtual.nome}
+
 
 
 className="
@@ -487,7 +620,10 @@ block
 
 "
 
+
+
 scrolling="no"
+
 
 
 allow="
@@ -498,30 +634,39 @@ picture-in-picture
 "
 
 
+
 allowFullScreen
+
 
 
 onLoad={()=>setLoading(false)}
 
 
+
 style={{
 
-border:"none",
-
-objectFit:"contain"
+border:"none"
 
 }}
+
 
 
 />
 
 
 
-</div>
 
 
 
 </div>
+
+
+
+
+
+
+</div>
+
 
 );
 
