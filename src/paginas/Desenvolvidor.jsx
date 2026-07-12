@@ -35,8 +35,8 @@ funcao:"Programador Full Stack | Técnico de Informática",
 
 biografia:`
 
-Augusto Firmino Correia é Programador Full Stack e Técnico de Informática,
-com formação na Universidade: ISPEKA, dedicado ao desenvolvimento de soluções
+Augusto Firmino Correia, Concluiu o Instituto de Telecomunicações - ITEL na área de formação média Técnica como Técnico de Informática,
+dando continuidade na sua formação na Universidade: Instituto Superior Politécnico Kalandula de Angola - ISPEKA, frequentando o 2º no Curso de Engenharia Informática. Dedicado ao desenvolvimento de soluções
 tecnológicas modernas, inovadoras e eficientes.
 
 Atua na criação de aplicações web completas, sistemas digitais, plataformas
