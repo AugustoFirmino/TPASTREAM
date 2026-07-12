@@ -10,8 +10,8 @@ import {
 } from "react-icons/fa";
 
 
-import dev1 from "../assets/dev1.jpg";
-import dev2 from "../assets/dev2.jpg";
+import dev1 from "../assets/devs1.jpeg";
+
 
 
 
@@ -103,71 +103,6 @@ telefone:"+244 900 000 000"
 },
 
 
-
-{
-
-
-id:2,
-
-nome:"Carlos Manuel",
-
-foto:dev2,
-
-
-instituicao:"Universidade de Tecnologia",
-
-funcao:"Software Developer",
-
-
-biografia:`
-
-Desenvolvedor focado na criação de soluções digitais modernas,
-interfaces intuitivas e sistemas escaláveis.
-
-Possui experiência no desenvolvimento web, integração de APIs,
-criação de aplicações e implementação de tecnologias para melhorar
-processos digitais.
-
-`,
-
-
-projetos:[
-
-"Sistema de Gestão Escolar",
-
-"Aplicativo Mobile",
-
-"Dashboard Administrativo",
-
-"Portal Institucional"
-
-],
-
-
-
-tecnologias:[
-
-"JavaScript",
-
-"React",
-
-"Express",
-
-"MongoDB",
-
-"Git",
-
-"Figma"
-
-],
-
-
-email:"carlos@email.com",
-
-telefone:"+244 911 111 111"
-
-
-}
 
 
 ];
