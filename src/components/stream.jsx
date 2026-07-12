@@ -55,7 +55,16 @@ const [loading,setLoading] = useState(true);
 
 const [online,setOnline] = useState(navigator.onLine);
 
-const [espectadores,setEspectadores] = useState({});
+const [espectadores,setEspectadores] = useState({
+
+"TPA 1":0,
+"TPA 2":0,
+"TPA Notícias":0,
+"TV Zimbo":0,
+"TV Girasol":0,
+"TV Parlamento":0
+
+});
 
 
 
@@ -72,9 +81,8 @@ useEffect(()=>{
 
 const onlineHandler=()=>{
 
-setOnline(true);
 
-setLoading(true);
+setOnline(true);
 
 
 if(!socket.connected){
@@ -87,11 +95,15 @@ socket.connect();
 };
 
 
+
 const offlineHandler=()=>{
+
 
 setOnline(false);
 
+
 };
+
 
 
 
@@ -105,6 +117,7 @@ window.addEventListener(
 "offline",
 offlineHandler
 );
+
 
 
 
@@ -136,10 +149,11 @@ offlineHandler
 
 
 
+
+
 // SOCKET
 
 useEffect(()=>{
-
 
 
 if(!socket.connected){
@@ -151,20 +165,21 @@ socket.connect();
 
 
 
+
 // receber contadores
 
 const receberEspectadores=(dados)=>{
 
 
 console.log(
-"CONTADORES:",
+"Espectadores:",
 dados
 );
 
 
-setEspectadores({
-...dados
-});
+
+setEspectadores(dados);
+
 
 
 };
@@ -183,13 +198,14 @@ receberEspectadores
 
 
 
-// entrar no canal sempre que conectar
+
+// entrar sempre no TPA 1 ao conectar
 
 const entrarCanal=()=>{
 
 
 console.log(
-"Entrou:",
+"Entrando:",
 canalAtual.nome
 );
 
@@ -199,6 +215,7 @@ socket.emit(
 "entrarCanal",
 canalAtual.nome
 );
+
 
 
 };
@@ -215,8 +232,6 @@ entrarCanal
 
 
 
-
-// se já conectado
 
 if(socket.connected){
 
@@ -269,20 +284,15 @@ const trocarCanal=(canal)=>{
 setLoading(true);
 
 
+
 setCanalAtual(canal);
 
-
-
-if(socket.connected){
 
 
 socket.emit(
 "entrarCanal",
 canal.nome
 );
-
-
-}
 
 
 
@@ -317,7 +327,9 @@ items-center
 
 
 
-{/* MENU */}
+
+
+{/* MENU CANAIS */}
 
 
 <div
@@ -374,7 +386,6 @@ canalAtual.nome===canal.nome
 {canal.nome}
 
 
-
 <br/>
 
 
@@ -394,7 +405,7 @@ gap-1
 <FaEye/>
 
 
-{espectadores[canal.nome] ?? 0}
+{espectadores[canal.nome]}
 
 
 
@@ -457,7 +468,6 @@ font-bold
 
 
 
-
 <div
 
 className="
@@ -485,18 +495,19 @@ animate-pulse
 />
 
 
+
 AO VIVO
+
 
 
 <FaEye/>
 
 
-{espectadores[canalAtual.nome] ?? 0}
+{espectadores[canalAtual.nome]}
 
 
 
 </div>
-
 
 
 </div>
@@ -573,6 +584,7 @@ Sem conexão
 </h2>
 
 
+
 </div>
 
 
@@ -605,6 +617,7 @@ items-center
 
 >
 
+
 <p className="font-bold">
 
 Aguardando conexão...
@@ -612,11 +625,11 @@ Aguardando conexão...
 </p>
 
 
+
 </div>
 
 
 }
-
 
 
 
@@ -671,9 +684,8 @@ onLoad={()=>setLoading(false)}
 
 
 
-
-
 </div>
+
 
 
 
