@@ -510,33 +510,29 @@ online && loading &&
 <div
 
 className="
-absolute
-inset-0
-z-20
+
+relative
+
+w-full
+
 bg-black
-text-white
-flex
-flex-col
-justify-center
-items-center
+
+rounded-xl
+
+overflow-hidden
+
+shadow-xl
+
+
+h-[220px]
+
+sm:h-[400px]
+
+lg:h-[610px]
+
 "
 
 >
-
-
-<div
-
-className="
-w-12
-h-12
-border-4
-border-red-600
-border-t-transparent
-rounded-full
-animate-spin
-"
-
-/>
 
 
 <p
