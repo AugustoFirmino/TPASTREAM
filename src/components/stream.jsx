@@ -42,7 +42,11 @@ url:"https://til-waiver-proudly-brave.trycloudflare.com/embed/5"
 {
 nome:"TV Parlamento",
 url:"https://www.youtube.com/embed/CIpNJ-bMGsI"
-}
+},
+{
+nome:"RCTV STREAM",
+url:"https://til-waiver-proudly-brave.trycloudflare.com/embed/1"
+},
 
 ];
 
