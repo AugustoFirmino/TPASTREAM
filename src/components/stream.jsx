@@ -19,27 +19,27 @@ url:"https://completed-boc-exams-gif.trycloudflare.com/embed/1"
 },
 {
 nome:"TPA 1",
-url:"https://completed-boc-exams-gif.trycloudflare.com/embed/1"
+url:"https://mines-thorough-ago-andreas.trycloudflare.com/embed/1"
 },
 
 {
 nome:"TPA 2",
-url:"https://completed-boc-exams-gif.trycloudflare.com/embed/1"
+url:"https://mines-thorough-ago-andreas.trycloudflare.com/embed/1"
 },
 
 {
 nome:"TPA Notícias",
-url:"https://completed-boc-exams-gif.trycloudflare.com/embed/1"
+url:"https://mines-thorough-ago-andreas.trycloudflare.com/embed/1"
 },
 
 {
 nome:"TV Zimbo",
-url:"https://completed-boc-exams-gif.trycloudflare.com/embed/1"
+url:"https://mines-thorough-ago-andreas.trycloudflare.com/embed/1"
 },
 
 {
 nome:"TV Girasol",
-url:"https://completed-boc-exams-gif.trycloudflare.com/embed/1"
+url:"https://mines-thorough-ago-andreas.trycloudflare.com/embed/1"
 },
 
 {
