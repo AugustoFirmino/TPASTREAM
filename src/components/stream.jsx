@@ -15,7 +15,7 @@ export default function Stream() {
 const canais = [
 {
 nome:"RCTV STREAM",
-url:"https://completed-boc-exams-gif.trycloudflare.com/embed/1"
+url:"https://mines-thorough-ago-andreas.trycloudflare.com/embed/1"
 },
 {
 nome:"TPA 1",
