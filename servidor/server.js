@@ -29,7 +29,10 @@ const io = new Server(server, {
   transports: ["websocket", "polling"],
 });
 
-// Contador de espectadores por canal
+// ===============================
+// CONTADORES
+// ===============================
+
 const espectadores = {
   "TPA 1": 0,
   "TPA 2": 0,
@@ -37,60 +40,85 @@ const espectadores = {
   "TV Zimbo": 0,
   "TV Girasol": 0,
   "TV Parlamento": 0,
+  "RCTV STREAM": 0
 };
 
-// Rota para teste
+// ===============================
+
 app.get("/", (req, res) => {
+
   res.json({
     status: "Servidor Socket.IO online",
     espectadores,
-    conexoes: io.engine.clientsCount,
+    conexoes: io.engine.clientsCount
   });
+
 });
 
 io.on("connection", (socket) => {
-  console.log("✅ Cliente conectado:", socket.id);
+
+  console.log("Cliente conectado:", socket.id);
 
   let canalAtual = null;
 
-  // Envia os espectadores atuais para o cliente que acabou de conectar
   socket.emit("espectadores", espectadores);
 
-  socket.on("entrarCanal", (canal) => {
-    console.log(`📺 ${socket.id} entrou em ${canal}`);
+  socket.on("pedirEspectadores", () => {
 
-    // Sai do canal anterior
-    if (canalAtual && espectadores[canalAtual] > 0) {
-      espectadores[canalAtual]--;
+    socket.emit("espectadores", espectadores);
+
+  });
+
+  socket.on("entrarCanal", (canal) => {
+
+    console.log("Entrou:", canal);
+
+    if (canalAtual) {
+
+      if (espectadores[canalAtual] > 0) {
+        espectadores[canalAtual]--;
+      }
+
+      socket.leave(canalAtual);
+
     }
 
-    // Entra no novo canal
     canalAtual = canal;
 
-    if (espectadores.hasOwnProperty(canal)) {
-      espectadores[canal]++;
+    if (!(canal in espectadores)) {
+      espectadores[canal] = 0;
     }
+
+    espectadores[canal]++;
+
+    socket.join(canal);
 
     console.log(espectadores);
 
-    // Atualiza todos os clientes
     io.emit("espectadores", espectadores);
+
   });
 
   socket.on("disconnect", () => {
-    console.log("❌ Cliente desconectado:", socket.id);
+
+    console.log("Saiu:", socket.id);
 
     if (canalAtual && espectadores[canalAtual] > 0) {
+
       espectadores[canalAtual]--;
+
+      io.emit("espectadores", espectadores);
+
     }
 
-    io.emit("espectadores", espectadores);
   });
+
 });
 
-// IMPORTANTE para funcionar no Render
 const PORT = process.env.PORT || 3000;
 
 server.listen(PORT, () => {
-  console.log(`🚀 Servidor rodando na porta ${PORT}`);
+
+  console.log("Servidor iniciado na porta", PORT);
+
 });
