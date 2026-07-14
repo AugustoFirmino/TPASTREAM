@@ -481,7 +481,7 @@ text-sm
 
 <p>
 
-© 2026 RCTV Stream. Todos os direitos reservados.
+© 2026 RCTVANGOLA. Todos os direitos reservados.
 
 </p>
 
