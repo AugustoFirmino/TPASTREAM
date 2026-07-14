@@ -15,31 +15,31 @@ export default function Stream() {
 const canais = [
 {
 nome:"RCTV STREAM",
-url:"https://til-waiver-proudly-brave.trycloudflare.com/embed/1"
+url:"https://completed-boc-exams-gif.trycloudflare.com/embed/1"
 },
 {
 nome:"TPA 1",
-url:"https://til-waiver-proudly-brave.trycloudflare.com/embed/1"
+url:"https://completed-boc-exams-gif.trycloudflare.com/embed/1"
 },
 
 {
 nome:"TPA 2",
-url:"https://til-waiver-proudly-brave.trycloudflare.com/embed/2"
+url:"https://completed-boc-exams-gif.trycloudflare.com/embed/1"
 },
 
 {
 nome:"TPA Notícias",
-url:"https://til-waiver-proudly-brave.trycloudflare.com/embed/3"
+url:"https://completed-boc-exams-gif.trycloudflare.com/embed/1"
 },
 
 {
 nome:"TV Zimbo",
-url:"https://til-waiver-proudly-brave.trycloudflare.com/embed/4"
+url:"https://completed-boc-exams-gif.trycloudflare.com/embed/1"
 },
 
 {
 nome:"TV Girasol",
-url:"https://til-waiver-proudly-brave.trycloudflare.com/embed/5"
+url:"https://completed-boc-exams-gif.trycloudflare.com/embed/1"
 },
 
 {
