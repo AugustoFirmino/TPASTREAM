@@ -32,7 +32,7 @@ function Hero() {
             w-fit
           ">
             <FaBroadcastTower className="animate-pulse text-xl" />
-            AO VIVO • STREAM RCTV
+            AO VIVO • STREAM RCTV Angola
           </span>
 
 
