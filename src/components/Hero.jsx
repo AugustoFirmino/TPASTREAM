@@ -5,7 +5,7 @@ import {
   FaBroadcastTower
 } from "react-icons/fa";
 
-import logo from "../assets/rctvstream.png";
+import logo from "../assets/tpa.jpeg";
 
 
 function Hero() {

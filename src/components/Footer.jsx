@@ -10,7 +10,7 @@ import {
   FaTiktok
 } from "react-icons/fa";
 
-import logo from "../assets/rctvstream-branco.png";
+import logo from "../assets/tpa.jpeg";
 import { Link } from "react-router-dom";
 
 
@@ -490,7 +490,7 @@ text-sm
 
 <p>
 
-© 2026 RCTVANGOLA. Todos os direitos reservados.
+© 2026 TPA STREAM. Todos os direitos reservados.
 
 </p>
 
