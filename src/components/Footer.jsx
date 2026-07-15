@@ -242,8 +242,7 @@ className="text-red-500"
 
 <span>
 
-Camama 2, Luanda, Angola
-
+ Angola, Luanda, camama
 </span>
 
 </div>
