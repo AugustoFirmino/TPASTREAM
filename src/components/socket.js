@@ -2,7 +2,7 @@ import { io } from "socket.io-client";
 
 
 const socket = io(
-  "https://rctvstream.onrender.com/",
+  "https://tpastream.onrender.com/",
   {
     transports:["websocket"]
   }

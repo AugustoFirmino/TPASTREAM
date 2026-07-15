@@ -4,10 +4,10 @@ import {
   FaEnvelope,
   FaFacebookF,
   FaInstagram,
-  FaYoutube,
   FaArrowRight,
   FaBroadcastTower,
-  FaPlayCircle
+  FaPlayCircle,
+  FaTiktok
 } from "react-icons/fa";
 
 import logo from "../assets/rctvstream-branco.png";
@@ -159,6 +159,7 @@ Assistir ao Vivo
 </li>
 </a>
 
+<a  href="#transmissao">
 <li className="
 hover:text-white
 transition
@@ -168,8 +169,10 @@ transition
 
 </li>
 
+</a>
 
 
+<a href="#transmissao">
 <li className="
 hover:text-white
 transition
@@ -178,9 +181,10 @@ transition
 Desporto
 
 </li>
+</a>
 
 
-
+<a a href="#transmissao">
 <li className="
 hover:text-white
 transition
@@ -189,7 +193,7 @@ transition
 Vídeos
 
 </li>
-
+</a>
 
 </ul>
 
@@ -238,7 +242,7 @@ className="text-red-500"
 
 <span>
 
-Luanda, Angola
+Camama 2, Luanda, Angola
 
 </span>
 
@@ -261,7 +265,7 @@ className="text-red-500"
 
 <span>
 
-+244 946 133 0 13
++244 2 320 025
 
 </span>
 
@@ -285,7 +289,7 @@ className="text-red-500"
 
 <span>
 
-rctvangola@gmail.com
+geral@tpa.ao
 
 </span>
 
@@ -316,7 +320,7 @@ font-bold
 mb-6
 ">
 
-Siga a RCTV
+Siga a TPA ONLINE
 
 </h3>
 
@@ -343,6 +347,8 @@ gap-4
 
 
 <a
+
+href="https://www.facebook.com/TelevisaoPublicadeAngola"
 className="
 w-12
 h-12
@@ -363,6 +369,8 @@ transition
 
 
 <a
+
+href="https://www.instagram.com/tpaonline/"
 className="
 w-12
 h-12
@@ -384,6 +392,7 @@ transition
 
 
 <a
+href="https://www.tiktok.com/@tpaonline"
 className="
 w-12
 h-12
@@ -397,7 +406,7 @@ transition
 "
 >
 
-<FaYoutube/>
+<FaTiktok/>
 
 </a>
 
@@ -426,7 +435,7 @@ transition
 
 >
   <Link to="/Devs">
-Conheça o Desenvolvedor da RCTV Stream
+Conheça o Desenvolvedor da TPA STREAM
 </Link>
 <FaArrowRight/>
 
