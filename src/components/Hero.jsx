@@ -32,7 +32,7 @@ function Hero() {
             w-fit
           ">
             <FaBroadcastTower className="animate-pulse text-xl" />
-            AO VIVO • TELEVISÃO PÚBLICA DE ANGOLA
+            AO VIVO • RCTV ANGOLA
           </span>
 
 
@@ -53,7 +53,7 @@ function Hero() {
             text-gray-200 
             leading-8
           ">
-            A <strong>TPA STREAM</strong> leva até si informação credível,
+            A <strong>RCTV STREAM</strong> leva até si informação credível,
             transmissões ao vivo, notícias de última hora, desporto,
             entretenimento e cobertura dos principais acontecimentos
             em Angola e no mundo.
